@@ -101,7 +101,14 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-  };
+		var uniqArr = [];
+		_.each(array, function(val) {
+			if(_.indexOf(uniqArr, val) === -1) {
+				uniqArr.push(val);
+			}
+		});
+		return uniqArr;	
+	};
 
 
   // Return the results of applying an iterator to each element.
