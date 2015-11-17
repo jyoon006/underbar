@@ -94,8 +94,8 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-		return _.filter(collection, function() {
-			return !test.apply(null, arguments);
+		return _.filter(collection, function(value) {
+			return !test(value);
 		});
   };
 
@@ -162,21 +162,16 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-		var finalValue;
-		if(accumulator === undefined) {
-		  var newCollection = collection.slice(1);
-		  finalValue = collection[0];
-		  _.each(newCollection, function(val) {
-		    finalValue = iterator(finalValue, val);    
-		  });    
-		}
-		else {
-		  finalValue = accumulator;
-		  _.each(collection, function(val) {
-		    finalValue = iterator(finalValue, val); 
-		  });
-		}
-		return finalValue;
+	 var result = accumulator;
+	  _.each(collection, function(value) {
+		 if(result === undefined) {
+			result = value;
+		 }
+		 else {
+			result = iterator(result, value);
+		 }
+		});
+	 return result;
   };
 
   // Determine if the array or object contains a given value (using `===`).
