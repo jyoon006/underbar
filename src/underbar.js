@@ -333,6 +333,13 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+	 var shulffedArr = array.slice(0);
+	 for(var i = 0; i < array.length; i++) {
+	 	var randomIndex = Math.floor(Math.random() * i);
+		var switchNum = shulffedArr.splice(randomIndex, 1);
+		shulffedArr.push(switchNum[0]);
+	 }
+	 return shulffedArr;
   };
 
 
