@@ -191,20 +191,22 @@
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
 	iterator = iterator || _.identity;
-	return _.reduce(collection, function(result, value) {
-	if(!result) {
-	return false;
-	}
-	return !!iterator(value);
+	 return _.reduce(collection, function(result, value) {
+	  if(!result) {
+	   return false;
+	  }
+	 return !!iterator(value);
 	}, true);
-		
-    
-  };
+};
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+		iterator = iterator || _.identity;
+		return !_.every(collection, function(value) {
+		 return !iterator(value);
+		});
   };
 
 
