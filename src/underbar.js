@@ -297,7 +297,7 @@
 	var list = {};
 	 return function() {
 	  var args = Array.prototype.slice.call(arguments);
-		if(args in list) {
+		if(list[args] !== undefined) {
 		 result = list[args];
 		}
 		else {
