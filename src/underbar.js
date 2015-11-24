@@ -334,7 +334,7 @@
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
 	 var shulffedArr = array.slice(0);
-	 for(var i = 0; i < array.length; i++) {
+	 for(var i = 1; i < array.length; i++) {
 	 	var randomIndex = Math.floor(Math.random() * i);
 		var switchNum = shulffedArr.splice(randomIndex, 1);
 		shulffedArr.push(switchNum[0]);
@@ -354,6 +354,14 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+		return _.map(collection, function(value) {
+		if(functionOrKey.constructor === Function) {
+		 return functionOrKey.apply(value, args);	
+		}
+		else if(functionOrKey.constructor === String) {
+		 return value[functionOrKey]();
+		}
+		});
   };
 
   // Sort the object's values by a criterion produced by an iterator.
