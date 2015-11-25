@@ -410,14 +410,14 @@
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
 	result = result || [];
-	for(var i = 0; i < nestedArray.length; i++) {
-   if(Array.isArray(nestedArray[i])) {
-    _.flatten(nestedArray[i], result);    
+	_.each(nestedArray, function(value) {
+   if(Array.isArray(value)) {
+    _.flatten(value, result);    
    }
    else {
-    result.push(nestedArray[i]);
+    result.push(value);
    }
-  }
+  });
   return result;	
   };
 
