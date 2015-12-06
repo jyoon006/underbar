@@ -454,5 +454,21 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
-  };
+		var result;
+		var startTime = new Date().getTime();
+		var timeMultiplier = 0;
+		var delayTime;
+		
+		return function() {	
+			var runTime = new Date().getTime() - startTime;
+			delayTime = wait * timeMultiplier;
+			if(runTime === 0 || runTime >= delayTime) {
+				setTimeout(function() {
+					result = func.apply(this, arguments);	
+				}, delayTime);
+				timeMultiplier++;
+			}
+			return result;
+		}
+	};
 }());
