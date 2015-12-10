@@ -461,10 +461,12 @@
 		
 		return function() {	
 			var runTime = new Date().getTime() - startTime;
+			var that = this;
+			var args = arguments;
 			delayTime = wait * timeMultiplier;
 			if(runTime === 0 || runTime >= delayTime) {
 				setTimeout(function() {
-					result = func.apply(this, arguments);	
+					result = func.apply(that, args);	
 				}, delayTime);
 				timeMultiplier++;
 			}
